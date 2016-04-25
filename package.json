@@ -1,0 +1,8 @@
+{
+    "name": "footywednesdays",
+    "main": "server.js",
+    "dependencies": {
+	"express": "*",
+        "mongoose": "*"
+    }
+}
