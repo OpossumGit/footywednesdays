@@ -4,8 +4,8 @@ var app        = express();                 // define our app using express
 var router = express.Router(); 
 
 var mongoose   = require('mongoose');
-//mongoose.connect('mongodb://localhost/footywednesdays'); // connect to our database
-mongoose.connect('mongodb://opossum:1Qasde32@ds032319.mlab.com:32319/footywednesdaysdb');
+var connectionString = process.env.CUSTOMCONNSTR_MONGOLAB_URI || 'mongodb://localhost/footywednesdays'
+mongoose.connect(connectionString);
 var Prijava = require('./app/models/prijava');
 
 // configure app to use bodyParser()
