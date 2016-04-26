@@ -46,7 +46,7 @@
 		    var cell0 = row.insertCell(0);
 		    var cell1 = row.insertCell(1);
 		    cell0.innerHTML = prijavljeni[x].name;
-		    cell1.innerHTML = "<div onclick=\"deletePrijava('"+prijavljeni[x]._id+"')\" style=\"cursor:pointer;text-align:center\">&#9003;</div>";
+		    cell1.innerHTML = "<div onclick=\"if(confirm('Obriši zapis: "+prijavljeni[x].name+"?')) deletePrijava('"+prijavljeni[x]._id+"')\" style=\"cursor:pointer;text-align:center\">&#9003;</div>";
 		}
 		if (prijavljeni.length>0) table.insertRow(-1).insertCell(0).innerHTML = "Prijava: " + prijavljeni.length;
             }
