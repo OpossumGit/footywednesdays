@@ -3,6 +3,7 @@
     "main": "server.js",
     "dependencies": {
 	"express": "*",
-        "mongoose": "*"
+        "mongoose": "*",
+	"serve-favicon": "*"
     }
 }

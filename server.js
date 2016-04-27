@@ -2,6 +2,8 @@ var express    = require('express');        // call express
 var app        = express();                 // define our app using express
 //var bodyParser = require('body-parser');
 var router = express.Router(); 
+var favicon = require('serve-favicon');
+app.use(favicon(__dirname + '/static/favicon.ico'));
 
 var mongoose   = require('mongoose');
 var connectionString = process.env.CUSTOMCONNSTR_MONGOLAB_URI || 'mongodb://localhost/footywednesdays'
