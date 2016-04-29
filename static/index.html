@@ -8,16 +8,19 @@
 <script>
     // POSTanje prijave
     var postPrijava = function(){
-        var xhttp = new XMLHttpRequest();
+	var name = document.getElementById("ime").value;
+	postPrijavaParam(name);
+    };
+
+    var postPrijavaParam = function(ime) {
+	var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
             if (xhttp.readyState == 4 && xhttp.status==200) {
-                init(); 
+                getPrijave(); 
             }
 	};
-        var name = document.getElementById("ime").value;
-        xhttp.open("POST", "api/prijave?name="+name);
+        xhttp.open("POST", "api/prijave?name="+ime);
 	xhttp.send();
-
     };
 	
     //DELETEanje prijave
@@ -25,7 +28,7 @@
 	var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
             if (xhttp.readyState == 4 && xhttp.status==200) {
-                init(); 
+                getPrijave(); 
             }
 	};
         xhttp.open("DELETE", "api/prijave?id="+id);
@@ -33,7 +36,7 @@
     }
 
     // GETanje svih prijava i iscrtavanje tablice
-    var init = function(){
+    var getPrijave = function(){
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
             if (xhttp.readyState == 4 && xhttp.status==200) {		
@@ -46,7 +49,7 @@
 		    var cell0 = row.insertCell(0);
 		    var cell1 = row.insertCell(1);
 		    cell0.innerHTML = prijavljeni[x].name;
-		    cell1.innerHTML = "<div onclick=\"if(confirm('Obriši zapis: "+prijavljeni[x].name+"?')) deletePrijava('"+prijavljeni[x]._id+"')\" style=\"cursor:pointer;text-align:center\">&#9003;</div>";
+		    cell1.innerHTML = "<div onclick=\"if(confirm('Obriši zapis: "+prijavljeni[x].name+"?')) deletePrijava('"+prijavljeni[x]._id+"')\" style=\"cursor:pointer;text-align:center\">&#9773;</div>";
 		}
 		if (prijavljeni.length>0) table.insertRow(-1).insertCell(0).innerHTML = "Prijava: " + prijavljeni.length;
             }
@@ -58,12 +61,79 @@
         document.getElementById("ime").focus(); 
     };
 
+    // POSTanje stalni
+    var postStalni = function(){
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (xhttp.readyState == 4 && xhttp.status==200) {
+                getStalni(); 
+            }
+	};
+        var name = document.getElementById("imeS").value;
+        xhttp.open("POST", "api/stalni?name="+name);
+	xhttp.send();
+
+    };
+	
+    //DELETEanje stalnog
+    var deleteStalni = function(id) {
+	var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (xhttp.readyState == 4 && xhttp.status==200) {
+                getStalni(); 
+            }
+	};
+        xhttp.open("DELETE", "api/stalni?id="+id);
+	xhttp.send();
+    }
+
+    // GETanje svih stalnih i iscrtavanje tablice
+    var getStalni = function(){
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (xhttp.readyState == 4 && xhttp.status==200) {		
+		var stalni = JSON.parse(xhttp.response);
+		var table = document.getElementById("stalniTab");
+		if (stalni.length == 0) table.innerHTML = ""; // clear table content
+		else table.innerHTML = "<tr><td>Stalni</td><td>Briši</td><td>Prijavi se</td></tr>"; // clear table content
+                for (var x = 0; x<stalni.length; x++) {
+		    var row = table.insertRow(-1);
+		    var cell0 = row.insertCell(0);
+		    var cell1 = row.insertCell(1);
+    		    var cell2 = row.insertCell(2);
+		    cell0.innerHTML = stalni[x].name;
+		    cell1.innerHTML = "<div onclick=\"if(confirm('Obriši zapis: "+stalni[x].name+"?')) deleteStalni('"+stalni[x]._id+"')\" style=\"cursor:pointer;text-align:center\">&#9773;</div>";
+		    cell2.innerHTML = "<div onclick=\"postPrijavaParam('"+stalni[x].name+"')\" style=\"cursor:pointer;text-align:center\">&#9650;</div>";
+		}
+		if (stalni.length>0) table.insertRow(-1).insertCell(0).innerHTML = "Stalnih: " + stalni.length;
+            }
+        };
+        xhttp.open("GET","api/stalni");
+        xhttp.send();
+
+        document.getElementById("imeS").value = ""; 
+        document.getElementById("imeS").focus(); 
+    };
+
+    // iscrtavanje i stalnih i prijava
+    var init = function(){
+	getStalni();
+	getPrijave();	
+    };
+
 </script>
 <div class="FWStyle">
 	<div class="insert">Prijave za iduću srijedu:</div>
 	<div class="insert">&#9998;<input id="ime" type="text" onkeydown="if (event.keyCode==13) postPrijava()"></div>
-
 	<table id ="prijaveTab">
+	</table>
+</div>
+<br>
+<div class="FWStyle">
+	<div class="insert">Stalni:</div>
+	<div class="insert">&#9998;<input id="imeS" type="text" onkeydown="if (event.keyCode==13) postStalni()"></div>
+
+	<table id ="stalniTab">
 	</table>
 </div>
 </body>
