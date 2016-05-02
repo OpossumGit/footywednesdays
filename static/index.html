@@ -177,9 +177,11 @@
 	var d = new Date(); // Today's date
 	dif = 7 - ((d.getDay() + 4) % 7); // Number of days to add until wednesday
 	d.setDate(d.getDate() + dif);
+	var day = d.getDate();
+	var month = d.getMonth()+1;
 
-	document.getElementById("titleP").innerHTML = "Prijave za iduću srijedu (" + d.getDay() + "." + d.getMonth() + "):";
-	document.getElementById("titleN").innerHTML = "Ne mogu iduću srijedu (" + d.getDay() + "." + d.getMonth() + "):";
+	document.getElementById("titleP").innerHTML = "Prijave za iduću srijedu (" + day + "." + month + "):";
+	document.getElementById("titleN").innerHTML = "Ne mogu iduću srijedu (" + day + "." + month + "):";
     };
 
 </script>
