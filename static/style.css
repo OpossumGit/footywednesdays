@@ -141,4 +141,40 @@
   	-webkit-transform: rotate(-37deg); /* Chrome, Safari, Opera */
 	transform: rotate(-37deg);
 }
+.Slicica5 {
+	position: fixed;
+	top: 105px;
+	left: 225px;
+	z-index:-5;
+	-ms-transform: rotate(27deg); /* IE 9 */
+  	-webkit-transform: rotate(27deg); /* Chrome, Safari, Opera */
+	transform: rotate(27deg);
+}
+.Slicica6 {
+	position: fixed;
+	top: 196px;
+	right: 195px;
+	z-index:-6;
+	-ms-transform: rotate(-47deg); /* IE 9 */
+  	-webkit-transform: rotate(-47deg); /* Chrome, Safari, Opera */
+	transform: rotate(-47deg);
+}
+.Slicica7 {
+	position: fixed;
+	bottom: 188px;
+	left: 335px;
+	z-index:-7;
+	-ms-transform: rotate(-42deg); /* IE 9 */
+  	-webkit-transform: rotate(-42deg); /* Chrome, Safari, Opera */
+	transform: rotate(-42deg);
+}
+.Slicica8 {
+	position: fixed;
+	bottom: 75px;
+	right: 365px;
+	z-index:-8;
+	-ms-transform: rotate(18deg); /* IE 9 */
+  	-webkit-transform: rotate(18deg); /* Chrome, Safari, Opera */
+	transform: rotate(18deg);
+}
 
