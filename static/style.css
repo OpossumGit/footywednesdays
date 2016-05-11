@@ -143,8 +143,8 @@
 }
 .Slicica5 {
 	position: fixed;
-	top: 305px;
-	left: 325px;
+	top: 505px;
+	left: 125px;
 	z-index:-5;
 	-ms-transform: rotate(27deg); /* IE 9 */
   	-webkit-transform: rotate(27deg); /* Chrome, Safari, Opera */
@@ -152,8 +152,8 @@
 }
 .Slicica6 {
 	position: fixed;
-	top: 296px;
-	right: 395px;
+	top: 496px;
+	right: 195px;
 	z-index:-6;
 	-ms-transform: rotate(-47deg); /* IE 9 */
   	-webkit-transform: rotate(-47deg); /* Chrome, Safari, Opera */
@@ -161,8 +161,8 @@
 }
 .Slicica7 {
 	position: fixed;
-	top: 588px;
-	left: 335px;
+	top: 788px;
+	left: 35px;
 	z-index:-7;
 	-ms-transform: rotate(-42deg); /* IE 9 */
   	-webkit-transform: rotate(-42deg); /* Chrome, Safari, Opera */
@@ -170,8 +170,8 @@
 }
 .Slicica8 {
 	position: fixed;
-	top: 675px;
-	right: 365px;
+	top: 875px;
+	right: 95px;
 	z-index:-8;
 	-ms-transform: rotate(18deg); /* IE 9 */
   	-webkit-transform: rotate(18deg); /* Chrome, Safari, Opera */
