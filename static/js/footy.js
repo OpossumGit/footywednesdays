@@ -36,7 +36,7 @@ app.controller('RegistrationController', function($scope, $http, $rootScope) {
 	$scope.deletePlayer = function(index){
 		bootbox.confirm("Briši \"" + registrations.players[index].name+ "\"?", function(result) {
   			if (result) {
-  				$http.delete("api/prijave?id==" + registrations.players[index]._id).then(function(response){
+  				$http.delete("api/prijave?id=" + registrations.players[index]._id).then(function(response){
 					getRegistrations();
 				});
   			};
@@ -71,7 +71,7 @@ app.controller('AbsenceController', function($scope, $http) {
 	$scope.deletePlayer = function(index){
 		bootbox.confirm("Briši \"" + absences.players[index].name+ "\"?", function(result) {
   			if (result) {
-				$http.delete("api/nemogu?id==" + absences.players[index]._id).then(function(response){
+				$http.delete("api/nemogu?id=" + absences.players[index]._id).then(function(response){
 					getAbsences();
 				});
 			};
@@ -103,7 +103,7 @@ app.controller('RegularsController', function($scope, $http, $rootScope) {
 	$scope.deletePlayer = function(index){
 		bootbox.confirm("Briši \"" + regulars.players[index].name+ "\"?", function(result) {
   			if (result) {
-				$http.delete("api/stalni?id==" + regulars.players[index]._id).then(function(response){
+				$http.delete("api/stalni?id=" + regulars.players[index]._id).then(function(response){
 					getRegulars();
 				});
 			};
