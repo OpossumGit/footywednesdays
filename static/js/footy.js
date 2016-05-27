@@ -20,6 +20,7 @@ app.controller('RegistrationController', function($scope, $http, $rootScope) {
 	var getRegistrations = function() {
 		$http.get('api/prijave').then(function(response){
 			registrations.players = response.data;
+			$("#prijavePill").html("Prijave ("+registrations.players.length+")");
 		});
 	};
 
@@ -30,6 +31,7 @@ app.controller('RegistrationController', function($scope, $http, $rootScope) {
 		$http.post("api/prijave?name=" + $scope.newPlayer).then(function(response){
 			getRegistrations();
 		});
+		//bootbox.alert($scope.newPlayer + " je prijavljen.");
 		$scope.newPlayer = '';
 	};
 
@@ -55,6 +57,7 @@ app.controller('AbsenceController', function($scope, $http) {
 	var getAbsences = function() {
 		$http.get('api/nemogu').then(function(response){
 			absences.players = response.data;
+			$("#neMoguPill").html("Ne mogu ("+absences.players.length+")");
 		});
 	};
 
@@ -87,6 +90,7 @@ app.controller('RegularsController', function($scope, $http, $rootScope) {
 	var getRegulars = function() {
 		$http.get('api/stalni').then(function(response){
 			regulars.players = response.data;
+			$("#stalniPill").html("Stalni ("+regulars.players.length+")");
 		});
 	};
 
@@ -114,6 +118,7 @@ app.controller('RegularsController', function($scope, $http, $rootScope) {
 	$scope.registerPlayer = function(index){
 		$http.post("api/prijave?name=" + regulars.players[index].name).then(function(response){
 			$rootScope.$emit('refreshRegularsEvent');
+			bootbox.alert(regulars.players[index].name + " je prijavljen.");
 		});
 			
 	};
