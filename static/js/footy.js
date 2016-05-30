@@ -1,4 +1,34 @@
-var app = angular.module('footyApp', [ ]);
+var app = angular.module('footyApp', ['ngTouch']);
+
+app.controller('bodyController', function($scope){
+	$scope.rightSwipe = function(){
+		switch($('.tab-pane.active').attr('id')) {
+		    case 'page1':
+		        $('[href="#page3"]').tab('show');
+		        break;
+	   	    case 'page2':
+		        $('[href="#page1"]').tab('show');
+		        break;
+		    case 'page3':
+		        $('[href="#page2"]').tab('show');
+		        break;
+		} 
+	};
+
+	$scope.leftSwipe = function(){
+		switch($('.tab-pane.active').attr('id')) {
+		    case 'page1':
+		        $('[href="#page2"]').tab('show');
+		        break;
+	   	    case 'page2':
+		        $('[href="#page3"]').tab('show');
+		        break;
+		    case 'page3':
+		        $('[href="#page1"]').tab('show');
+		        break;
+		} 
+	};
+});
 
 app.controller('NextWednesdayController', function(){
 
@@ -20,7 +50,7 @@ app.controller('RegistrationController', function($scope, $http, $rootScope) {
 	var getRegistrations = function() {
 		$http.get('api/prijave').then(function(response){
 			registrations.players = response.data;
-			$("#prijavePill").html("Prijave ("+registrations.players.length+")");
+			$('#prijavePill').html('Prijave ('+registrations.players.length+')');
 		});
 	};
 
@@ -28,17 +58,16 @@ app.controller('RegistrationController', function($scope, $http, $rootScope) {
 	
 	$scope.submitPlayer = function(){
 		if (!$scope.newPlayer) return;
-		$http.post("api/prijave?name=" + $scope.newPlayer).then(function(response){
+		$http.post('api/prijave?name=' + $scope.newPlayer).then(function(response){
 			getRegistrations();
 		});
-		//bootbox.alert($scope.newPlayer + " je prijavljen.");
 		$scope.newPlayer = '';
 	};
 
 	$scope.deletePlayer = function(index){
-		bootbox.confirm("Briši \"" + registrations.players[index].name+ "\"?", function(result) {
+		bootbox.confirm('Briši "' + registrations.players[index].name+ '"?', function(result) {
   			if (result) {
-  				$http.delete("api/prijave?id=" + registrations.players[index]._id).then(function(response){
+  				$http.delete('api/prijave?id=' + registrations.players[index]._id).then(function(response){
 					getRegistrations();
 				});
   			};
@@ -57,7 +86,7 @@ app.controller('AbsenceController', function($scope, $http) {
 	var getAbsences = function() {
 		$http.get('api/nemogu').then(function(response){
 			absences.players = response.data;
-			$("#neMoguPill").html("Ne mogu ("+absences.players.length+")");
+			$('#neMoguPill').html('Ne mogu ('+absences.players.length+')');
 		});
 	};
 
@@ -65,16 +94,16 @@ app.controller('AbsenceController', function($scope, $http) {
 	
 	$scope.submitPlayer = function(){
 		if (!$scope.newPlayer) return;
-		$http.post("api/nemogu?name=" + $scope.newPlayer).then(function(response){
+		$http.post('api/nemogu?name=' + $scope.newPlayer).then(function(response){
 			getAbsences();
 		});
 		$scope.newPlayer = '';
 	};
 
 	$scope.deletePlayer = function(index){
-		bootbox.confirm("Briši \"" + absences.players[index].name+ "\"?", function(result) {
+		bootbox.confirm('Briši "' + absences.players[index].name+ '"?', function(result) {
   			if (result) {
-				$http.delete("api/nemogu?id=" + absences.players[index]._id).then(function(response){
+				$http.delete('api/nemogu?id=' + absences.players[index]._id).then(function(response){
 					getAbsences();
 				});
 			};
@@ -90,7 +119,7 @@ app.controller('RegularsController', function($scope, $http, $rootScope) {
 	var getRegulars = function() {
 		$http.get('api/stalni').then(function(response){
 			regulars.players = response.data;
-			$("#stalniPill").html("Stalni ("+regulars.players.length+")");
+			$('#stalniPill').html('Stalni ('+regulars.players.length+')');
 		});
 	};
 
@@ -98,16 +127,16 @@ app.controller('RegularsController', function($scope, $http, $rootScope) {
 	
 	$scope.submitPlayer = function(){
 		if (!$scope.newPlayer) return;
-		$http.post("api/stalni?name=" + $scope.newPlayer).then(function(response){
+		$http.post('api/stalni?name=' + $scope.newPlayer).then(function(response){
 			getRegulars();
 		});
 		$scope.newPlayer = '';
 	};
 
 	$scope.deletePlayer = function(index){
-		bootbox.confirm("Briši \"" + regulars.players[index].name+ "\"?", function(result) {
+		bootbox.confirm('Briši "' + regulars.players[index].name+ '"?', function(result) {
   			if (result) {
-				$http.delete("api/stalni?id=" + regulars.players[index]._id).then(function(response){
+				$http.delete('api/stalni?id=' + regulars.players[index]._id).then(function(response){
 					getRegulars();
 				});
 			};
@@ -116,9 +145,9 @@ app.controller('RegularsController', function($scope, $http, $rootScope) {
 
 
 	$scope.registerPlayer = function(index){
-		$http.post("api/prijave?name=" + regulars.players[index].name).then(function(response){
+		$http.post('api/prijave?name=' + regulars.players[index].name).then(function(response){
 			$rootScope.$emit('refreshRegularsEvent');
-			bootbox.alert(regulars.players[index].name + " je prijavljen.");
+			bootbox.alert(regulars.players[index].name + ' je prijavljen.');
 		});
 			
 	};

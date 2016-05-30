@@ -7,10 +7,11 @@
     <script src="js/bootstrap.min.js"></script> <!-- Treba za bootbox -->
     <script src="js/bootbox.min.js"></script> <!-- Treba za confirm dialog-->
     <script src="js/angular.min.js"></script> <!-- Treba :) -->
+    <script src="js/angular-touch.min.js"></script>
     <script src="js/footy.js"></script> <!-- Angular kontroleri-->
     <link href="css/bootstrap.min.css" rel="stylesheet"> 
   </head>
-  <body>
+  <body ng-controller="bodyController as bc" ng-swipe-left="leftSwipe()" ng-swipe-right="rightSwipe()">
 
     <div class="container">
       <div ng-controller="NextWednesdayController as nwc">
