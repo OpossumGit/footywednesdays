@@ -9,6 +9,7 @@ body {
   margin-bottom: 30px;
 }
 .footer {
+  padding-top: 5px;
   position: fixed;
   bottom: 0;
   width: 100%;
