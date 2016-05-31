@@ -51,6 +51,18 @@ app.controller('RegistrationController', function($scope, $http, $rootScope) {
 		$http.get('api/prijave').then(function(response){
 			registrations.players = response.data;
 			$('#prijavePill').html('Prijave ('+registrations.players.length+')');
+
+			$('#footerBar').html(registrations.players.length + '/12');
+			var pct = (registrations.players.length/12)*100;
+			$('#footerBar').attr('style', 'width:'+pct+'%');
+			if (pct >= 100) {
+				$('#footerBar').addClass('progress-bar-success');
+			} else if (pct < 80) {
+				$('#footerBar').addClass('progress-bar-danger');
+			} else {
+				$('#footerBar').removeClass('progress-bar-success');
+				$('#footerBar').removeClass('progress-bar-danger');
+			}
 		});
 	};
 

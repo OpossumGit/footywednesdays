@@ -10,6 +10,7 @@
     <script src="js/angular-touch.min.js"></script>
     <script src="js/footy.js"></script> <!-- Angular kontroleri-->
     <link href="css/bootstrap.min.css" rel="stylesheet"> 
+    <link href="css/sticky-footer.css" rel="stylesheet"> 
   </head>
   <body ng-controller="bodyController as bc" ng-swipe-left="leftSwipe()" ng-swipe-right="rightSwipe()">
 
@@ -79,7 +80,14 @@
 
     </div>
 
-
+	<footer class="footer">
+		<div class="container">
+			 <div class="progress">
+				<div class="progress-bar progress-bar-striped active" role="progressbar" id="footerBar" style="width:0%">0/12
+				</div>
+			</div>
+		</div>
+	</footer>
 
   </body>
 </html>
