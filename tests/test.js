@@ -1,57 +1,196 @@
 var request = require('supertest'); 
-var assert = require('chai').assert;
-var expect = require('chai').expect;
+//var assert = require('chai').assert;
+var chai = require('chai');
+var chaiSubset = require('chai-subset');
+chai.use(chaiSubset);
+var expect = chai.expect;
 
-describe('Routing', function() {
-	var url = 'http://localhost:8080';
+var app = require('../app');
 
+describe('API Routing', function() {
 	describe('Get api welcome response', function() {
 		it('should not return error', function(done){ 
-			request(url)
-			.get('/api')
-			.end(function(err, res) {
-				expect(err).to.be.null;
-				expect(res.status).to.be.equal(200);
-				
-				done();
-			});
+			request(app).get('/api')
+			.expect(200,done);
 		});
 	});
 
-	describe('Prijave', function() {
+	describe('Prijave API', function() {
 		var preTestLen;
-		it('GET should not return error', function(done){ 
-			request(url)
-			.get('/api/prijave')
+		var createdId;
+		it('GET doesn`t return error nor too old data', function(done){ 
+			request(app).get('/api/prijave')
+			.expect(200)
 			.end(function(err, res) {
-				expect(err).to.be.null;
-				expect(res.status).to.be.equal(200);
+				if (err) return done(err);
+				preTestLen=res.body.length;
+				res.body.forEach(function (item){
+					var itemDaysOld = (new Date()-new Date(item.date))/(1000*60*60*24);
+					expect(itemDaysOld).to.be.below(7);
+				});
+				done();
+			});
+		});
+
+		it('POST doesn`t return error', function(done){ 
+			request(app).post('/api/prijave?name=testrecord')
+			.expect(200)
+			.end(function(err, res) {
+				if (err) return done(err);
+				createdId = res.body.message;
+				done();
+			});
+		});
+
+		it('GET after POST has new row', function(done){ 
+			request(app).get('/api/prijave')
+			.expect(200)
+			.end(function(err, res) {
+				if (err) return done(err);
+				expect(res.body.length).to.be.equal(preTestLen+1);
+				expect(res.body).to.containSubset([{_id:createdId,name:'testrecord'}]);
+				done();
+			});
+		});
+
+		it('DELETE doesn`t return error', function(done){ 
+			request(app).delete('/api/prijave?id='+createdId)
+			.expect(200)
+			.end(function(err, res) {
+				if (err) return done(err);
+				expect(res.body.message).to.be.equal('Successfully deleted');
+				done();
+			});
+		});
+
+		it('GET after DELETE doesn`t have deleted row', function(done){ 
+			request(app).get('/api/prijave')
+			.expect(200)
+			.end(function(err, res) {
+				if (err) return done(err);
+				expect(res.body.length).to.be.equal(preTestLen);
+				expect(res.body).not.to.containSubset([{_id:createdId,name:'testrecord'}]);
+				done();
+			});
+		});
+
+	});
+
+	describe('Ne mogu API', function() {
+		var preTestLen;
+		var createdId;
+		it('GET doesn`t return error nor too old data', function(done){ 
+			request(app).get('/api/nemogu')
+			.expect(200)
+			.end(function(err, res) {
+				if (err) return done(err);
+				preTestLen=res.body.length;
+				res.body.forEach(function (item){
+					var itemDaysOld = (new Date()-new Date(item.date))/(1000*60*60*24);
+					expect(itemDaysOld).to.be.below(7);
+				});
+				done();
+			});
+		});
+
+		it('POST doesn`t return error', function(done){ 
+			request(app).post('/api/nemogu?name=testrecord')
+			.expect(200)
+			.end(function(err, res) {
+				if (err) return done(err);
+				createdId = res.body.message;
+				done();
+			});
+		});
+
+		it('GET after POST has new row', function(done){ 
+			request(app).get('/api/nemogu')
+			.expect(200)
+			.end(function(err, res) {
+				if (err) return done(err);
+				expect(res.body.length).to.be.equal(preTestLen+1);
+				expect(res.body).to.containSubset([{_id:createdId,name:'testrecord'}]);
+				done();
+			});
+		});
+
+		it('DELETE doesn`t return error', function(done){ 
+			request(app).delete('/api/nemogu?id='+createdId)
+			.expect(200)
+			.end(function(err, res) {
+				if (err) return done(err);
+				expect(res.body.message).to.be.equal('Successfully deleted');
+				done();
+			});
+		});
+
+		it('GET after DELETE doesn`t have deleted row', function(done){ 
+			request(app).get('/api/nemogu')
+			.expect(200)
+			.end(function(err, res) {
+				if (err) return done(err);
+				expect(res.body.length).to.be.equal(preTestLen);
+				expect(res.body).not.to.containSubset([{_id:createdId,name:'testrecord'}]);
+				done();
+			});
+		});
+
+	});
+
+	describe('Stalni API', function() {
+		var preTestLen;
+		var createdId;
+		it('GET doesn`t return error', function(done){ 
+			request(app).get('/api/nemogu')
+			.expect(200)
+			.end(function(err, res) {
+				if (err) return done(err);
 				preTestLen=res.body.length;
 				done();
 			});
 		});
-		it('POST should create row', function(done){ 
-			request(url)
-			.post('/api/prijave?name=testrecord')
-			.end(function(err, res) {
-				expect(err).to.be.null;
-				expect(res.status).to.be.equal(200);
 
+		it('POST doesn`t return error', function(done){ 
+			request(app).post('/api/nemogu?name=testrecord')
+			.expect(200)
+			.end(function(err, res) {
+				if (err) return done(err);
+				createdId = res.body.message;
 				done();
 			});
-			
 		});
-		it('GET after post should have new row', function(done){ 
-			request(url)
-			.get('/api/prijave')
+
+		it('GET after POST has new row', function(done){ 
+			request(app).get('/api/nemogu')
+			.expect(200)
 			.end(function(err, res) {
-				expect(err).to.be.null;
-				expect(res.status).to.be.equal(200);
+				if (err) return done(err);
 				expect(res.body.length).to.be.equal(preTestLen+1);
+				expect(res.body).to.containSubset([{_id:createdId,name:'testrecord'}]);
 				done();
 			});
 		});
 
+		it('DELETE doesn`t return error', function(done){ 
+			request(app).delete('/api/nemogu?id='+createdId)
+			.expect(200)
+			.end(function(err, res) {
+				if (err) return done(err);
+				expect(res.body.message).to.be.equal('Successfully deleted');
+				done();
+			});
+		});
+
+		it('GET after DELETE doesn`t have deleted row', function(done){ 
+			request(app).get('/api/nemogu')
+			.expect(200)
+			.end(function(err, res) {
+				if (err) return done(err);
+				expect(res.body.length).to.be.equal(preTestLen);
+				expect(res.body).not.to.containSubset([{_id:createdId,name:'testrecord'}]);
+				done();
+			});
+		});
 
 	});
 });

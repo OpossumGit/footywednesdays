@@ -10,11 +10,11 @@ router.route('/nemogu')
         var nemogu = new Nemogu();      // create a new instance of the model
         nemogu.name = req.query.name;  // set the name (comes from the request)
         // save and check for errors
-        nemogu.save(function(err) {
+        nemogu.save(function(err, nemogu) {
             if (err)
                 res.send(err);
 	    else
-                res.json({ message: 'Nemogu created!' });
+                res.json({ message: nemogu._id });
         });
     })
         

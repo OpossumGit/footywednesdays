@@ -10,11 +10,11 @@ router.route('/prijave')
         var prijava = new Prijava();      // create a new instance of the model
         prijava.name = req.query.name;  // set the name (comes from the request)
         // save and check for errors
-        prijava.save(function(err) {
+        prijava.save(function(err, prijava) {
             if (err)
                 res.send(err);
 	    else
-                res.json({ message: 'Prijava created!' });
+                res.json({ message: prijava._id });
         });
     })
         

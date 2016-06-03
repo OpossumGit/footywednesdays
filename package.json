@@ -10,8 +10,9 @@
     "test": "./node_modules/mocha/bin/mocha tests"
   },
   "devDependencies": {
-    "supertest": "^1.2.0",
     "chai": "*",
-    "mocha": "*"
+    "chai-subset": "^1.2.2",
+    "mocha": "*",
+    "supertest": "^1.2.0"
   }
 }

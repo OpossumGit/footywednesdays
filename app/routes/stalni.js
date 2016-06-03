@@ -10,11 +10,11 @@ router.route('/stalni')
         var stalni = new Stalni();      // create a new instance of the model
         stalni.name = req.query.name;  // set the name (comes from the request)
         // save and check for errors
-        stalni.save(function(err) {
+        stalni.save(function(err, stalni) {
             if (err)
                 res.send(err);
 	    else
-                res.json({ message: 'Stalni created!' });
+                res.json({ message: stalni._id });
         });
     })
         
