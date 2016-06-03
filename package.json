@@ -1,9 +1,17 @@
 {
-    "name": "footywednesdays",
-    "main": "server.js",
-    "dependencies": {
-	"express": "*",
-        "mongoose": "*",
-	"serve-favicon": "*"
-    }
+  "name": "footywednesdays",
+  "main": "server.js",
+  "dependencies": {
+    "express": "*",
+    "mongoose": "*",
+    "serve-favicon": "*"
+  },
+  "scripts": {
+    "test": "./node_modules/mocha/bin/mocha tests"
+  },
+  "devDependencies": {
+    "supertest": "^1.2.0",
+    "chai": "*",
+    "mocha": "*"
+  }
 }
