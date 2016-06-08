@@ -19,6 +19,7 @@ var welcomeRouter=require('./app/routes/welcome');
 var prijaveRouter=require('./app/routes/prijava');
 var stalniRouter=require('./app/routes/stalni');
 var nemoguRouter=require('./app/routes/nemogu');
+var notifikacijaRouter=require('./app/routes/notifikacija');
 
 // REGISTER OUR ROUTES
 app.use(defaultRouter);
@@ -26,6 +27,7 @@ app.use('/api', welcomeRouter);
 app.use('/api', prijaveRouter);
 app.use('/api', stalniRouter);
 app.use('/api', nemoguRouter);
+app.use('/api', notifikacijaRouter);
 
 // static files folder
 app.use(express.static('static'));

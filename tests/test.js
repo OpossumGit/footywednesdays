@@ -193,6 +193,83 @@ describe('API Routing', function() {
 		});
 
 	});
+
+	describe('Notifikacije API', function() {
+		it('DELETE doesn`t return error', function(done){ 
+			request(app).delete('/api/notifikacija')
+			.expect(200)
+			.end(function(err, res) {
+				if (err) return done(err);
+				expect(res.body.message).to.be.equal('Successfully deleted');
+				done();
+			});
+		});
+
+		it('GET after delete is empty', function(done){ 
+			request(app).get('/api/nemogu')
+			.expect(200)
+			.end(function(err, res) {
+				if (err) return done(err);
+				expect(res.body.text).to.be.equal(undefined);
+				done();
+			});
+		});
+		
+		it('POST doesn`t return error', function(done){ 
+			request(app).post('/api/notifikacija?text=Ovo%20je%20test')
+			.expect(200,done);
+		});
+
+		it('GET after post has added notifikacija', function(done){ 
+			request(app).get('/api/notifikacija')
+			.expect(200)
+			.end(function(err, res) {
+				if (err) return done(err);
+				expect(res.body.text).to.be.equal('Ovo je test');
+			
+				done();
+			});
+		});
+
+		it('Another POST doesn`t return error', function(done){ 
+			request(app).post('/api/notifikacija?text=Ovo%20je%20novo')
+			.expect(200,done);
+		});
+
+		it('GET after post reads new notifikacija', function(done){ 
+			request(app).get('/api/notifikacija')
+			.expect(200)
+			.end(function(err, res) {
+				if (err) return done(err);
+				expect(res.body.text).to.be.equal('Ovo je novo');
+			
+				done();
+			});
+		});
+
+		it('DELETE to clear all doesn`t return error', function(done){ 
+			request(app).delete('/api/notifikacija')
+			.expect(200)
+			.end(function(err, res) {
+				if (err) return done(err);
+				expect(res.body.message).to.be.equal('Successfully deleted');
+				done();
+			});
+		});
+
+		it('GET after delete all is empty', function(done){ 
+			request(app).get('/api/nemogu')
+			.expect(200)
+			.end(function(err, res) {
+				if (err) return done(err);
+				expect(res.body.text).to.be.equal(undefined);
+				done();
+			});
+		});
+
+
+
+	});
 });
 
 
