@@ -1,6 +1,6 @@
-var app = angular.module('footyApp', ['ngTouch']);
+var app = angular.module('footyApp', ['ngTouch','ui-notification']);
 
-app.controller('bodyController', function($scope){
+app.controller('bodyController', function($scope, $http, Notification){
 	$scope.rightSwipe = function(){
 		switch($('.tab-pane.active').attr('id')) {
 		    case 'page1':
@@ -28,6 +28,11 @@ app.controller('bodyController', function($scope){
 		        break;
 		} 
 	};
+
+	$http.get('api/notifikacija').then(function(response){
+		if (response.data) Notification(response.data.text);
+	});
+
 });
 
 app.controller('NextWednesdayController', function(){
