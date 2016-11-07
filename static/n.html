@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html ng-app="notifyApp">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <script src="js/angular.min.js"></script> <!-- Treba :) -->
+    <script src="js/notify.js"></script> <!-- Angular kontroleri-->
+
+    <link href="css/bootstrap.min.css" rel="stylesheet"> 
+  </head>
+  <body>
+
+    <div class="container">
+      <div ng-controller="notifyController as nc">
+       <h1>Notifikacija</h1>
+	<input class="form-control" placeholder="Upiši novi tekst notifikacije" ng-keyup="$event.keyCode == 13 && submitNotification()" ng-model="newNotification" />
+	<button type="button" class="btn btn-primary btn-block" ng-click="deleteNotification()">Obriši notifikaciju</button>
+      </div>
+  </body>
+</html>

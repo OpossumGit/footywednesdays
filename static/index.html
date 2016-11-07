@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html ng-app="footyApp">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#337ab7">
+    <meta charset="utf-8">
+    <script src="js/jquery-2.2.3.min.js"></script> <!-- Treba za bootstrap i bootbox-->
+    <script src="js/bootstrap.min.js"></script> <!-- Treba za bootbox -->
+    <script src="js/bootbox.min.js"></script> <!-- Treba za confirm dialog-->
+    <script src="js/angular.min.js"></script> <!-- Treba :) -->
+    <script src="js/angular-touch.min.js"></script>
+    <script src="js/footy.js"></script> <!-- Angular kontroleri-->
+    <script src="js/angular-ui-notification.min.js"></script> <!-- notifikacije-->
+
+    <link href="css/bootstrap.min.css" rel="stylesheet"> 
+    <link href="css/sticky-footer.css" rel="stylesheet"> 
+    <link href="css/angular-ui-notification.min.css" rel="stylesheet">
+
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="manifest" href="manifest.json">
+  </head>
+  <body ng-controller="bodyController as bc" ng-swipe-left="leftSwipe()" ng-swipe-right="rightSwipe()">
+
+    <div class="container">
+      <div ng-controller="NextWednesdayController as nwc">
+       <h3>Nogomet u srijedu <small>{{nwc.day}}.{{nwc.month}}</small></h3>
+      </div>
+
+      <ul class="nav nav-pills">
+        <li class="active"><a data-toggle="pill" href="#page1" id="prijavePill">Prijave</a></li>
+        <li><a data-toggle="pill" href="#page2" id="neMoguPill">Ne mogu</a></li>
+        <li><a data-toggle="pill" href="#page3" id="stalniPill">Stalni</a></li>
+      </ul>
+
+      <div class="tab-content">
+      <div ng-controller="RegistrationController as registrations" id="page1" class="tab-pane fade in active">
+        <input class="form-control" placeholder="Upiši se ovdje ako dolaziš" ng-keyup="$event.keyCode == 13 && submitPlayer()" ng-model="newPlayer" />
+        <table class="table table-hover table-striped">
+          <!--<tr><th>Prijavljeni ({{registrations.players.length}}):</th><th> </th></tr> -->
+        <tr ng-repeat="player in registrations.players">
+          <td>
+            {{player.name}}
+          </td>
+          <td>
+            <button class="btn btn-default btn-sm" type="button" ng-click="deletePlayer($index)" ><span class="glyphicon glyphicon-trash"></span> Briši</button>
+          </td>
+        </tr>
+        </table>
+      </div>
+
+       <div ng-controller="AbsenceController as absences" id="page2" class="tab-pane fade">
+        <input class="form-control" placeholder="Upiši se ovdje ako ne dolaziš" ng-keyup="$event.keyCode == 13 && submitPlayer()" ng-model="newPlayer" />
+        <table class="table table-hover table-striped">
+          <!--<tr><th>Ne mogu ({{absences.players.length}}):</th><th> </th></tr> -->
+        <tr ng-repeat="player in absences.players">
+          <td>
+            {{player.name}}
+          </td>
+          <td>
+            <button class="btn btn-default btn-sm" type="button" ng-click="deletePlayer($index)" ><span class="glyphicon glyphicon-trash"></span> Briši</button>
+          </td>
+        </tr>
+        </table>
+      </div>
+
+      <div ng-controller="RegularsController as regulars" id="page3" class="tab-pane fade">
+        <input class="form-control" placeholder="Upiši se ovdje ako si stalni"  ng-keyup="$event.keyCode == 13 && submitPlayer()" ng-model="newPlayer" />
+        <table class="table table-hover table-striped">
+          <!-- <tr><th>Stalni  ({{regulars.players.length}}):</th><th> </th><th> </th></tr> -->
+        <tr ng-repeat="player in regulars.players">
+          <td>
+            {{player.name}}
+          </td>
+          <td>
+            <button class="btn btn-default btn-sm" type="button" ng-click="deletePlayer($index)" ><span class="glyphicon glyphicon-trash"></span> Briši</button>
+          </td>
+          <td>
+            <button class="btn btn-default btn-sm" type="button" ng-click="registerPlayer($index)" ><span class="glyphicon glyphicon-log-in"></span> Prijavi se</button>
+          </td>
+        </tr>
+        </table>
+      </div>
+
+      </div>
+
+
+
+    </div>
+
+	<footer class="footer">
+		<div class="container">
+			 <div class="progress">
+				<div class="progress-bar progress-bar-striped active" role="progressbar" id="footerBar" style="width:0%">0/12
+				</div>
+			</div>
+		</div>
+	</footer>
+
+
+  </body>
+</html>
