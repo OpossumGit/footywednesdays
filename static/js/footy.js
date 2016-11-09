@@ -62,7 +62,9 @@ app.controller('RegistrationController', function($scope, $http, $rootScope) {
 			$('#prijavePill').html('Prijave ('+registrations.players.length+')');
 			registrations.players.forEach( function (player)
 			{
-			   player.ago = moment(player.date).fromNow();
+			   if (moment(player.date).isBefore(new Date()) {
+				   player.ago = moment(player.date).fromNow();
+			   }
 			});
 
 			$('#footerBar').html(registrations.players.length + '/12');
@@ -114,7 +116,9 @@ app.controller('AbsenceController', function($scope, $http) {
 			$('#neMoguPill').html('Ne mogu ('+absences.players.length+')');
 			absences.players.forEach( function (player)
 			{
-			   player.ago = moment(player.date).fromNow();
+			   if (moment(player.date).isBefore(new Date()) {
+				   player.ago = moment(player.date).fromNow();
+			   }
 			});
 		});
 	};
