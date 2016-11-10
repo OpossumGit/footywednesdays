@@ -44,7 +44,7 @@ app.controller('NextWednesdayController', function(){
 		dif = 7 - ((d.getDay() + 4) % 7); // Number of days to add until wednesday
 		d.setDate(d.getDate() + dif);
 	}
-	d.setHours(21);
+	d.setHours(19);
 	d.setMinutes(0);
 	this.day = d.getDate();
 	this.month = d.getMonth()+1;
