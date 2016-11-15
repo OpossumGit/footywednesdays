@@ -9,6 +9,7 @@
     <script src="js/bootbox.min.js"></script> <!-- Treba za confirm dialog-->
     <script src="js/angular.min.js"></script> <!-- Treba :) -->
     <script src="js/angular-touch.min.js"></script>
+    <script src="js/moment-with-locales.min.js"></script> <!-- notifikacije-->
     <script src="js/footy.js"></script> <!-- Angular kontroleri-->
     <script src="js/angular-ui-notification.min.js"></script> <!-- notifikacije-->
 
@@ -23,7 +24,7 @@
 
     <div class="container">
       <div ng-controller="NextWednesdayController as nwc">
-       <h3>Nogomet u srijedu <small>{{nwc.day}}.{{nwc.month}}</small></h3>
+       <h3>Nogomet {{nwc.day}}.{{nwc.month}} <small>{{nwc.when}}</small></h3>
       </div>
 
       <ul class="nav nav-pills">
@@ -39,7 +40,7 @@
           <!--<tr><th>Prijavljeni ({{registrations.players.length}}):</th><th> </th></tr> -->
         <tr ng-repeat="player in registrations.players">
           <td>
-            {{player.name}}
+            {{player.name}} <small>({{player.ago}})</small>
           </td>
           <td>
             <button class="btn btn-default btn-sm" type="button" ng-click="deletePlayer($index)" ><span class="glyphicon glyphicon-trash"></span> Briši</button>
@@ -54,7 +55,7 @@
           <!--<tr><th>Ne mogu ({{absences.players.length}}):</th><th> </th></tr> -->
         <tr ng-repeat="player in absences.players">
           <td>
-            {{player.name}}
+            {{player.name}} <small>({{player.ago}})</small>
           </td>
           <td>
             <button class="btn btn-default btn-sm" type="button" ng-click="deletePlayer($index)" ><span class="glyphicon glyphicon-trash"></span> Briši</button>

@@ -39,12 +39,16 @@ app.controller('NextWednesdayController', function(){
 
 	var dif;
 	var d = new Date(); // Today's date
+
 	if (d.getDay() != 3) { // ako nije danas potraži iduću srijedu
 		dif = 7 - ((d.getDay() + 4) % 7); // Number of days to add until wednesday
 		d.setDate(d.getDate() + dif);
 	}
+	d.setHours(19);
+	d.setMinutes(0);
 	this.day = d.getDate();
 	this.month = d.getMonth()+1;
+	this.when = moment(d).fromNow();
 
 });
 
@@ -55,7 +59,15 @@ app.controller('RegistrationController', function($scope, $http, $rootScope) {
 	var getRegistrations = function() {
 		$http.get('api/prijave').then(function(response){
 			registrations.players = response.data;
-			$('#prijavePill').html('Prijave ('+registrations.players.length+')');
+			$('#prijavePill').html('Prijave <small>('+registrations.players.length+')</small>');
+			registrations.players.forEach( function (player)
+			{
+			   if (moment(player.date).isBefore(new Date())) {
+				player.ago = moment(player.date).fromNow();
+			   } else {
+				player.ago = moment(new Date()).fromNow();
+			   };
+			});
 
 			$('#footerBar').html(registrations.players.length + '/12');
 			var pct = (registrations.players.length/12)*100;
@@ -103,7 +115,15 @@ app.controller('AbsenceController', function($scope, $http) {
 	var getAbsences = function() {
 		$http.get('api/nemogu').then(function(response){
 			absences.players = response.data;
-			$('#neMoguPill').html('Ne mogu ('+absences.players.length+')');
+			$('#neMoguPill').html('Ne mogu <small>('+absences.players.length+')</small>');
+			absences.players.forEach( function (player)
+			{
+			   if (moment(player.date).isBefore(new Date())) {
+				player.ago = moment(player.date).fromNow();
+			   } else {
+				player.ago = moment(new Date()).fromNow();
+			   }
+			});
 		});
 	};
 
@@ -136,8 +156,8 @@ app.controller('RegularsController', function($scope, $http, $rootScope) {
 	var getRegulars = function() {
 		$http.get('api/stalni').then(function(response){
 			regulars.players = response.data;
-			$('#stalniPill').html('Stalni ('+regulars.players.length+')');
-		});
+			$('#stalniPill').html('Stalni <small>('+regulars.players.length+')</small>');
+		}); 
 	};
 
 	getRegulars();
@@ -170,3 +190,5 @@ app.controller('RegularsController', function($scope, $http, $rootScope) {
 	};
 
 	});
+
+moment.locale('hr');
