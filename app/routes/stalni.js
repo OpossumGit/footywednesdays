@@ -18,7 +18,7 @@ router.route('/stalni')
         });
     })
         
-    // get all stalni  (accessed at GET http://localhost:8080/api/stalni)
+ /*   // get all stalni  (accessed at GET http://localhost:8080/api/stalni)
     .get(function(req, res) {
 	Stalni.find(function(err, stalni) {
             if (err)
@@ -27,7 +27,19 @@ router.route('/stalni')
                 res.json(stalni);
             });
         }) 
+*/	
+    // get all stalni since 1st day of month  (accessed at GET http://localhost:8080/api/stalni)
+    .get(function(req, res) {
+	var d = new Date();
+	var firstDay = new Date(d.getFullYear(), d.getMonth(), 1);
 
+	Stalni.find({"date": {$gt:firstDay}}, function(err, stalni) {
+            if (err)
+                res.send(err);
+	    else
+                res.json(stalni);
+            });
+        }) 
      // DELETE http://localhost:8080/api/stalni?id=...
      .delete(function(req, res) {
         Stalni.remove({
