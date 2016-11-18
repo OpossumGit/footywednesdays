@@ -189,6 +189,10 @@ app.controller('RegularsController', function($scope, $http, $rootScope) {
 			
 	};
 
+	$scope.is9999 = function(date){
+	    return date.substring(0,4)=='9999';
+	};
+
 	});
 
 moment.locale('hr');

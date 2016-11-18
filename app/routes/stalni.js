@@ -4,11 +4,15 @@ var router = express.Router();
 var Stalni = require('../models/stalni');
 
 router.route('/stalni')
-    // create a prijava (accessed at POST http://localhost:8080/api/stalni?name=tvrtko)
+    // create a stalni (accessed at POST http://localhost:8080/api/stalni?name=tvrtko)
     .post(function(req, res) {
         
         var stalni = new Stalni();      // create a new instance of the model
         stalni.name = req.query.name;  // set the name (comes from the request)
+	if (stalni.name.indexOf('*')!=-1){
+	    stalni.name = stalni.name.replace(/\*/g,'').trim();
+	    stalni.date = new Date(9999, 11, 31);
+	}
         // save and check for errors
         stalni.save(function(err, stalni) {
             if (err)
