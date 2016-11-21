@@ -2,3 +2,4 @@ node_modules
 azure.err
 *.publishsettings
 npm-debug.log
+LaunchConfigurations/
