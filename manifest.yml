@@ -1,0 +1,10 @@
+applications:
+- path: .
+  memory: 128M
+  instances: 1
+  domain: mybluemix.net
+#  name: footywednesdays
+#  host: footywednesdays
+  disk_quota: 1024M
+#  env:
+#    CUSTOMCONNSTR_MONGOLAB_URI: mongodb://username:password@ds032319.mlab.com:32319/footywednesdaysdb
