@@ -32,12 +32,21 @@ router.route('/stalni')
             });
         }) 
 */	
-    // get all stalni since 1st day of month  (accessed at GET http://localhost:8080/api/stalni)
+    // get all stalni since 7 days before end of month  (accessed at GET http://localhost:8080/api/stalni)
     .get(function(req, res) {
 	var d = new Date();
-	var firstDay = new Date(d.getFullYear(), d.getMonth(), 1);
+	var midnight = new Date(d.getFullYear(),d.getMonth(),d.getDate(), 23, 59, 59, 999);
+	var eoM = new Date(d.getFullYear(),d.getMonth() + 1, 0, 23, 59, 59, 999);
+	var cutoffDate = new Date();
+	if (eoM.getDate()-midnight.getDate() > 6) { 
+		cutoffDate = new Date(d.getFullYear(), d.getMonth(), 0, 23, 59, 59, 999);
+	}
+	else {
+		cutoffDate = eoM;
+	}
+	cutoffDate.setDate(cutoffDate.getDate() - 7);
 
-	Stalni.find({"date": {$gt:firstDay}}, function(err, stalni) {
+	Stalni.find({"date": {$gt:cutoffDate}}, function(err, stalni) {
             if (err)
                 res.send(err);
 	    else
