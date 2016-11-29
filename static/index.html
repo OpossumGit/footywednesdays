@@ -36,7 +36,7 @@
       <div class="tab-content">
       <div ng-controller="RegistrationController as registrations" id="page1" class="tab-pane fade in active">
         <input class="form-control" placeholder="Upiši se ako dolaziš" ng-keyup="$event.keyCode == 13 && submitPlayer()" ng-model="newPlayer" />
-        <table class="table table-hover table-striped">
+        <table class="table table-hover table-striped table-condensed">
           <!--<tr><th>Prijavljeni ({{registrations.players.length}}):</th><th> </th></tr> -->
         <tr ng-repeat="player in registrations.players">
           <td>
@@ -51,7 +51,7 @@
 
        <div ng-controller="AbsenceController as absences" id="page2" class="tab-pane fade">
         <input class="form-control" placeholder="Upiši se ako ne dolaziš" ng-keyup="$event.keyCode == 13 && submitPlayer()" ng-model="newPlayer" />
-        <table class="table table-hover table-striped">
+        <table class="table table-hover table-striped table-condensed">
           <!--<tr><th>Ne mogu ({{absences.players.length}}):</th><th> </th></tr> -->
         <tr ng-repeat="player in absences.players">
           <td>
@@ -66,7 +66,7 @@
 
       <div ng-controller="RegularsController as regulars" id="page3" class="tab-pane fade">
         <input class="form-control" placeholder="Upiši se ako si stalni (sa * za trajni upis)."  ng-keyup="$event.keyCode == 13 && submitPlayer()" ng-model="newPlayer" />
-        <table class="table table-hover table-striped">
+        <table class="table table-hover table-striped table-condensed">
           <!-- <tr><th>Stalni  ({{regulars.players.length}}):</th><th> </th><th> </th></tr> -->
         <tr ng-repeat="player in regulars.players">
           <td>
