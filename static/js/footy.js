@@ -59,7 +59,7 @@ app.controller('RegistrationController', function($scope, $http, $rootScope) {
 	var getRegistrations = function() {
 		$http.get('api/prijave').then(function(response){
 			registrations.players = response.data;
-			$('#prijavePill').html('Prijave <small>('+registrations.players.length+')</small>');
+			$('#prijavePill').html('Prijave <span class="badge">'+registrations.players.length+'</span>');
 			registrations.players.forEach( function (player)
 			{
 			   if (moment(player.date).isBefore(new Date())) {
@@ -115,7 +115,7 @@ app.controller('AbsenceController', function($scope, $http) {
 	var getAbsences = function() {
 		$http.get('api/nemogu').then(function(response){
 			absences.players = response.data;
-			$('#neMoguPill').html('Ne mogu <small>('+absences.players.length+')</small>');
+			$('#neMoguPill').html('Ne mogu <span class="badge">'+absences.players.length+'</span>');
 			absences.players.forEach( function (player)
 			{
 			   if (moment(player.date).isBefore(new Date())) {
@@ -156,7 +156,7 @@ app.controller('RegularsController', function($scope, $http, $rootScope) {
 	var getRegulars = function() {
 		$http.get('api/stalni').then(function(response){
 			regulars.players = response.data;
-			$('#stalniPill').html('Stalni <small>('+regulars.players.length+')</small>');
+			$('#stalniPill').html('Stalni <span class="badge">'+regulars.players.length+'</span>');
 		}); 
 	};
 
