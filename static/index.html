@@ -42,8 +42,8 @@
           <td>
             {{player.name}} <small>({{player.ago}})</small>
           </td>
-          <td>
-            <button class="btn btn-default btn-sm" type="button" ng-click="deletePlayer($index)" ><span class="glyphicon glyphicon-trash"></span> Briši</button>
+          <td class="text-right">
+            <button class="btn btn-default btn-xs" type="button" ng-click="deletePlayer($index)" ><span class="glyphicon glyphicon-trash"></span></button>
           </td>
         </tr>
         </table>
@@ -57,8 +57,8 @@
           <td>
             {{player.name}} <small>({{player.ago}})</small>
           </td>
-          <td>
-            <button class="btn btn-default btn-sm" type="button" ng-click="deletePlayer($index)" ><span class="glyphicon glyphicon-trash"></span> Briši</button>
+          <td class="text-right">
+            <button class="btn btn-default btn-xs" type="button" ng-click="deletePlayer($index)" ><span class="glyphicon glyphicon-trash"></span></button>
           </td>
         </tr>
         </table>
@@ -73,11 +73,8 @@
 	    <strong ng-if="is9999(player.date)">{{player.name}}</strong ng-if="is9999(player.date)">
 	    <div ng-if="!is9999(player.date)">{{player.name}}</div ng-if="!is9999(player.date)">
           </td>
-          <td>
-            <button class="btn btn-default btn-sm" type="button" ng-click="deletePlayer($index)" ><span class="glyphicon glyphicon-trash"></span> Briši</button>
-          </td>
-          <td>
-            <button class="btn btn-default btn-sm" type="button" ng-click="registerPlayer($index)" ><span class="glyphicon glyphicon-log-in"></span> Prijavi se</button>
+          <td class="text-right">
+            <button class="btn btn-primary btn-xs" type="button" ng-click="registerPlayer($index)" ><span class="glyphicon glyphicon-log-in"></span> Prijavi se</button> <button class="btn btn-default btn-xs" type="button" ng-click="deletePlayer($index)" ><span class="glyphicon glyphicon-trash"></span></button>
           </td>
         </tr>
         </table>
