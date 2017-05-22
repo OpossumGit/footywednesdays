@@ -36,14 +36,14 @@
       <div class="tab-content">
       <div ng-controller="RegistrationController as registrations" id="page1" class="tab-pane fade in active">
         <input class="form-control" placeholder="Upiši se ako dolaziš" ng-keyup="$event.keyCode == 13 && submitPlayer()" ng-model="newPlayer" />
-        <table class="table table-hover table-striped">
+        <table class="table table-hover table-striped table-condensed">
           <!--<tr><th>Prijavljeni ({{registrations.players.length}}):</th><th> </th></tr> -->
         <tr ng-repeat="player in registrations.players">
           <td>
             {{player.name}} <small>({{player.ago}})</small>
           </td>
-          <td>
-            <button class="btn btn-default btn-sm" type="button" ng-click="deletePlayer($index)" ><span class="glyphicon glyphicon-trash"></span> Briši</button>
+          <td class="text-right">
+            <button class="btn btn-default btn-xs" type="button" ng-click="deletePlayer($index)" ><span class="glyphicon glyphicon-trash"></span></button>
           </td>
         </tr>
         </table>
@@ -51,14 +51,14 @@
 
        <div ng-controller="AbsenceController as absences" id="page2" class="tab-pane fade">
         <input class="form-control" placeholder="Upiši se ako ne dolaziš" ng-keyup="$event.keyCode == 13 && submitPlayer()" ng-model="newPlayer" />
-        <table class="table table-hover table-striped">
+        <table class="table table-hover table-striped table-condensed">
           <!--<tr><th>Ne mogu ({{absences.players.length}}):</th><th> </th></tr> -->
         <tr ng-repeat="player in absences.players">
           <td>
             {{player.name}} <small>({{player.ago}})</small>
           </td>
-          <td>
-            <button class="btn btn-default btn-sm" type="button" ng-click="deletePlayer($index)" ><span class="glyphicon glyphicon-trash"></span> Briši</button>
+          <td class="text-right">
+            <button class="btn btn-default btn-xs" type="button" ng-click="deletePlayer($index)" ><span class="glyphicon glyphicon-trash"></span></button>
           </td>
         </tr>
         </table>
@@ -66,18 +66,15 @@
 
       <div ng-controller="RegularsController as regulars" id="page3" class="tab-pane fade">
         <input class="form-control" placeholder="Upiši se ako si stalni (sa * za trajni upis)."  ng-keyup="$event.keyCode == 13 && submitPlayer()" ng-model="newPlayer" />
-        <table class="table table-hover table-striped">
+        <table class="table table-hover table-striped table-condensed">
           <!-- <tr><th>Stalni  ({{regulars.players.length}}):</th><th> </th><th> </th></tr> -->
         <tr ng-repeat="player in regulars.players">
           <td>
 	    <strong ng-if="is9999(player.date)">{{player.name}}</strong ng-if="is9999(player.date)">
 	    <div ng-if="!is9999(player.date)">{{player.name}}</div ng-if="!is9999(player.date)">
           </td>
-          <td>
-            <button class="btn btn-default btn-sm" type="button" ng-click="deletePlayer($index)" ><span class="glyphicon glyphicon-trash"></span> Briši</button>
-          </td>
-          <td>
-            <button class="btn btn-default btn-sm" type="button" ng-click="registerPlayer($index)" ><span class="glyphicon glyphicon-log-in"></span> Prijavi se</button>
+          <td class="text-right">
+            <button class="btn btn-primary btn-xs" type="button" ng-click="registerPlayer($index)" ><span class="glyphicon glyphicon-log-in"></span> Prijavi se</button> <button class="btn btn-default btn-xs" type="button" ng-click="deletePlayer($index)" ><span class="glyphicon glyphicon-trash"></span></button>
           </td>
         </tr>
         </table>
